@@ -42,4 +42,4 @@ npm run dev
 Purpose
 This project was developed as an academic and practical learning project to understand real world React application structure and hospital workflow management
 
-This project was developed as an academic and practical learning project to understand real world React application structure and hospital workflow management.
+
