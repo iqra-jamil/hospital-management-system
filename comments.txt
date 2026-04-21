@@ -1,0 +1,267 @@
+//login,logout,pagination
+
+layout componet main wo components rakhty hain jo har page par show krny hn like side bar 
+outlet component
+
+//sign in py krny sy login py jay 
+//home page login hona chaiy
+
+
+
+layout and  outlet components
+src folder k and components folder is k and layoutfolder name layout layout k andr UI UI main for example buttons wgera jo entire website par same rahen gy  layout folder k andr Applayout.jsx,(applayout main hedaer footer ko render krna h) header.jsx ,footer.jsx,router jo hmepage par bnaia tha waha applayout .jsx ko home page bnana h then us k children main baaki sab pages ko rkhna h children:[{},{}] header ,footer jahan pr render krwain hain un k darmian ma outlet render krwa dena h import kr k sab pages ka layout same rhy ga is sy header footer sab pages pr show hn gy un  k baaqi pages ka content darmian m show ho ga header footer applayout.jsx main render hn gy 
+.............................private router.....................................
+sab sy phly private router bnana h dashboard ka taaky jo user logged in nai h wo dashboard ko acess na kr sky 
+for that frst we will create private router file , usestate hook bnani h app.jsx main yeh track krny k liy user loggedin h ya nai 
+then us usestate k seeter function ko as a prop login component ko pass krna h or login component main recve krna h to set its value to true (on onFinish) after navigating to dashboard and then us useState variable ko recve krna h private router main or us par chk krna h k agr us ke value true h to dashboard main jao or agr nai h to login page pr navigate kr jao
+.............................store credentials in localstorage.....................................
+loggedin status ko localstorage main store krna h taaky agr user browser refresh kr ya browser close kry to b wo loggedin rhy 
+sab sy phly chek krna h k user loggein h ya nai is status  ko local storage main storekrna h using setItem (flag or token) then loggedin status ko update krna h k user jo h wo logged in ho chuka h then naviagte to dashboard
+and the get that flag or token on privateroute and apply ternary on that acesstoken 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+After the user enters their Emp Id and Password and clicks Login, the app checks if the credentials match the expected values. If they do, instead of storing the actual password or Emp Id, the app creates a simple token or flag, like `"accessToken": "true"`, and saves it in localStorage. This token represents that the user is logged in and allows the app to remember the login even after a page refresh or browser restart. The `isLoggedin` state is updated immediately so the UI responds to the login, and the user is navigated to the Dashboard. In the PrivateRoute, the app checks if this token exists in localStorage; if it does, the Dashboard is shown, and if not, the user is redirected to the Login page. This way, the login state persists safely without storing sensitive information like the password.
+
+
+
+//routes ko app function k andr create krna chaiy bcz usestate hook humy hmesha function k andr he declare krni hoti h
+//usestate hook app(parent )component main decalre krna chaiy so that we can use it in different components 
+//then pass the usestate hook as a prop to the component and recive it whre we wana use it or update it
+//as a prop recive krny k liy {setisLoggedin}
+
+
+// localStorage vs cookies
+// 1.localstorage: store data in browser, vs cookies: small pieces of data stored in browser
+//2. localstorage:data persist even after closing the browser va cookies : they can have expiration date,after which browser delete them 
+//3.localstorage:Can store larger amounts of data (usually up to 5-10 MB). vs cookies :Size limit is very small (about 4 KB).
+//4.localstorage:Data is only accessible on the same domain. vs cookies : Usually used for sessions, authentication, and tracking.
+//5.localstorage:Does not automatically send data to the server. vs cookies :Sent to the server with every HTTP request
+ //6.You use localStorage for saving preferences or temporary data on the client side. vs You use cookies for login sessions or when the server needs to access the data.
+
+{/* {isLoggedin ? <Dashboard/> : <Login/>}  krny sy login page dashboard pr b render ho jayt ga navigate krny k bjay */ }
+{/* <Navigate to="/Dashboard"/> krny sy  url to change ho jay ga dashboard par redirect b ho jay ga lkn componet pura render nai ho ga */ }
+//  Render karna: Component turant screen par dikh jata hai, URL change nahi hota.
+//  Navigate karna: Browser URL change hota hai aur route ke hisaab se component load hota hai.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//differnce between useNavigate and Navigate()
+//useNavigate is a hook vs Navigate() is a component (we don’t create <Navigate /> yourself because it’s already provided by React Router.)
+//we should use "useNavigate" inside a function and Navigate() inside jsx
+//you should never use useNavigate() directly inside JSX
+//use Navigate() for conditional rendring to redirect while rendering.
+//Inside a function or event handler, use useNavigate() to redirect immediately.
+// summary : 
+// * Use `Navigate` when you want to **redirect while rendering a component**. Example: if a user is not logged in, show `<Navigate to="/Login"/>`.
+
+// * Use `useNavigate` when you want to **redirect after an action**, like a button click or form submit. Example: after logout, call `navigate("/Login")`.
+
+
+// agr jo name user nay search box main enter kia h wo match kr jay us name sy jo listFour ka andr h to us entire roe ko hig light krna h
+//props.value &&  agr serach value box empty ha yani user ny kuch enter nai kia to yeh props.value&& false h agr enter kia h to yeh true h or jab yeh true h tbi agla expression evaluate ho otherwise nai (yani tbi include ho agr yeh chk nai lgain gy to includes tab b chly ga jab inpout box emoty h)
+//  patient_name jo k datatable m h us main chk krna h k kia jo value user ny enter ke h matlb (props.value) pateient name main mojud h ya nai agr h to includes true return kry ga agr nai mojud to includes false return kry ga true return kry ga to row highlight ho ge else nai ho ge
+// className={
+//   props.value.toLowerCase() ===
+//   dataItem.patient_name.toLowerCase()
+//     ? "highlight"
+//     : ""
+{/* <div className="box1" style={{ backgroundColor: "red", padding: "3px 25px" }}>P1</div>
+ <div className="box2" style={{ backgroundColor: "#e96529", padding: "3px 25px" }}>P2</div>
+ <div className="box3" style={{ backgroundColor: "#66468e", padding: "3px 25px" }}>P3</div>
+ <div className="box4" style={{ backgroundColor: "#3d817c", padding: "3px 25px" }}>P4</div> */}
+// return props.value.toLowerCase() === name.patient_name.toLowerCase();
+      {/* <div className="dataContainer">
+        <div className="dashboardHeading">
+          <h1>
+            Emergency Managemnt System
+          </h1>
+        </div>
+
+        <table className="tableDataa">
+          <thead>
+            <tr className="tableheadings">
+
+              <th>token_priority</th>
+              <th>patient name</th>
+              <th>mr_no</th>
+              <th>Age</th>
+              <th>father_name</th>
+              <th>DOB</th>
+              <th>Total Bill</th>
+            </tr>
+          </thead>
+          <tbody className="tableBody">
+            {patientNames.slice(startIndex, endIndex).map((dataItem, Id) => {
+              return (
+                <tr
+                  key={Id}
+                  className={
+                    props.value && dataItem.patient_name.toLowerCase().includes(props.value.toLowerCase())
+                      ? "highlight"
+                      : ""}
+                >
+
+                  <td data-label="token priority"><div className="circle"></div>{dataItem.token_priority}</td>
+                  <td data-label="Patient Name">{dataItem.patient_name}</td>
+                  <td data-label="mr_no">{dataItem.mr_no}</td>
+                  <td data-label="age">{dataItem.age}</td>
+                  <td data-label="father name">{dataItem.father_name}</td>
+                  <td data-label="DOB">{dataItem.dob}</td>
+                  <td data-label="total">{dataItem.total}</td>
+
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div> */}
+      {/* <div className="boxes">
+        <TablePagination currentPage={currentPage} setcurrentPage={setcurrentPage} />
+      </div> */}
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     //////////////////////////////////////// MyTable.jsx with comments///////////////////////////////////////////////
+     import React from 'react';
+import { Space, Table } from 'antd';
+//table: rows aur columns me data show karta hai
+//Space: rows or columns main gap show krta h
+//dono ant design k components hain
+import data from '../assets/Datatable.json';
+//json file h JSON ek format hai jo data ko human-readable aur computer-readable dono tarah se store karta hai.
+const columns = [
+  //columns is an array each object in this array is representing one coulmn
+  {
+    title: 'Token Priority',
+    // What appears as the column header in the table, here it’s 'Token Priority'
+    dataIndex: 'token_priority',
+  //The key from your data source that this column should display, here 'token_priority'
+    key: 'token_priority',
+    //A unique identifier for React to track this column, usually same as dataIndex.
+    render: text => (
+      //A function to customize how the cell content looks
+      <>
+      <div className="circle"></div>
+      {/* text is the value from dataIndex, here it adds a <div class="circle"> before the actual value. */}
+        {text}
+      </>
+    )
+  },
+  {
+    title: 'Patient Name',//title,har column ka header
+    dataIndex: 'patient_name', //yeh wo key h json file main hai
+    key: 'patient_name', //unique identifier,har clumn ko uniquly identify krny k liy
+    // render: text => (
+    //   <>
+    //     {text}
+    //   </>
+    // )
+  },
+  {
+    title: 'MR No',
+    dataIndex: 'mr_no',
+    key: 'mr_no',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Father Name',
+    dataIndex: 'father_name',
+    key: 'father_name',
+  },
+  {
+    title: 'DOB',
+    dataIndex: 'dob',
+    key: 'dob',
+  },
+  {
+    title: 'Total Bill',
+    dataIndex: 'total',
+    key: 'total',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, record) => (
+      <Space size="middle">
+        <a>Invite {record.patient_name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+];
+//(_,text) record render function k parametrs hain dono agr srf ail cell ke value chaiy to text or agr pury record ke value chaiy to record parametr use krna hota h 
+const MyTable = ({ data }) => (
+  <div className="tableContainer">
+    <Table
+      columns={columns} //coulumn ke heading kia h or us column main dikhana kia h (title and  dataIndex)
+      dataSource={data} //dataSource me sirf column headings ke neeche ka actual data hota hai, headings nahi
+      pagination={{ position: ['bottomCenter'] }}
+    />
+  </div>
+);
+
+export default MyTable;
+//<Table/> component hai jo table render karta hai
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////FROM LOGIN FORMp Page////////////////////////////////////////////////////
+//to set ant design form's input field and label vertical set its layout prop to vertical in Form tag flex box will not work on it Because Ant Design’s Form.Item uses its own internal layout that overrides your flex styles.
+//type="primary" in button is for designing htmlType="submit" is to submit a form B of button should be capital
+//warning
+//antd.js?v=4b559375:1135 Warning: [antd: compatible] antd v5 support React is 16 ~ 18. see https://u.ant.design/v5-for-19 for compatible.
+//ant design also have its own icons
+//install ant design icons, import icons from ant design icons, render them using prefix e.g.., prefix={<UserOutlined/>} isnide input field or prefix={<LockOutlined/>} // first icon in a field suffix={<EyeOutlined/>}//single icon in the same field
+// use prefix ,suffix inside input and use icon instead of prefix ,suffix in buttons etc
+//localStorage can only store strings, so you must use "true" (with quotes), not the boolean true.
+
+   // get access token
+      // save accesstoken inside localstorage/cookies
+      // localstorage can store strings only 
+      //key (acessToken) and value ("true")
+
+
+
+     // else {
+    //   if (EmpId === "" && Password === "") {
+    //     console.log("fill the empty field");
+    //     alert("fill the empty field");
+    //  } 
+    // // else {
+    // //     console.error("incorrect password or emp ID");
+    // //     alert("field data is incorrect")
+      
+    // //   }
+    // }
+
+
+
+
+    //////////////////////////////////before 28 nov /////////////////////////////////////////////////
+    const users = [{name:'avc', age:12, password:'abc123'},{name:'def', age:12, password:'abc123'}]
+
+
+// register
+// first get the array of users from local storage
+// find the current users, (emp id)
+//  do not register
+// otherwise add to the array and insert into localStorage
+
+// in regestration compare empId only 
+
+
+// login
+// get users from local storage
+// find and match emp id and password
+// then login.
+
+// register patient button
+// on click open a form 
+// Token Priority	Patient Name	MR No	Age	Father Name	DOB	Total Bill	
+// submit => save in local storage
+
+
+
+

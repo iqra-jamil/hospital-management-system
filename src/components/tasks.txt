@@ -1,0 +1,28 @@
+// suggestion list forms main show nai honi chiay (autocomplete="off")(done)
+// forms ka data horizontal he ho ga
+// login form bottom sy touch nai krna chaiy center m hona chaiy
+
+//selct.option use nai ho ga instead hum array bnaien gy us array ko map krwaien gy(done)
+//usestate hooks ant design main use nai hn ge(done)
+//input fields width in signup form(done)
+
+
+1/12/2026
+useimperative hook
+use context in a specific component
+redux tool kit
+//useimperative hook
+services m same table banana h btn k sath fields hn ge drawer m import btn hona chaiy or wo data jo drawer m show horha h wo data un fields m import ho jana chaiy or the may be table m show ho jay
+//header footer ko daikhna h
+//hooks baaki sab m b abi use krni hain
+
+
+//basics
+sequence of code lines
+hoisting
+scope
+clousures 
+errors types
+controled vs ucontrolled 
+promises
+let,var ,const

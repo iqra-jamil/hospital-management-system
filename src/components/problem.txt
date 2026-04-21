@@ -1,0 +1,28 @@
+Problem 1:(in Data.jsx) Table showed action icons with no data because filteredPatient was initialized incorrectly and <Table> was conditionally rendered.
+Fix: Initialize filteredPatient as props.patientDatastate and always render <Table> without checking dataSource.length.
+Result: Headings display correctly and action icons appear only when actual data exists.
+
+Problem 2 : useState changes do not show instantly on the UI, React updates the UI on the next render.
+//it was adding data in localstorage but was showing data on UI only on 2nd render(Data.jsx (useEffect))
+problem 3 : in patientdataform.jsx : i was using usstae to track input values of evn input values in ant design but ant design provide 
+values object which automaticaly track the values of input 
+then we can use key in oibject and field's name as key values
+this problem was adding previous delted rows again in the table whn we tried to fill the form for the 2nd time
+logic to add: 
+
+// const loggedInUser = localStorage.getItem("loggedInUser");
+// get logged in user from local storage
+// then add condition to the Add user button
+// if isAdmin = 1 then show the button other wise hide it
+..............................................add logic in users...................................
+//admin b user he hota h but us ko alg variable m store kr k localstorage m save krna h 
+//admin yani table main jo bhi phla user ho ga us k pass action btns nai hn gy 
+//admin registr kr skta h yani (signup form) or login bhi kr skta h yani login.jsx 
+//admin or baaki sary users table main show hn gy users add user btn sy ain gy 
+//userList main signup page sy arhy h 
+//userdata add user btn sy arha h 
+
+
+
+//make an appointment form should have two fields with a dropdown patient and dctrs
+https://www.google.com/search?sca_esv=69ce569418db93e5&sxsrf=AE3TifNrH5wDGHEY749y2-TOvksmr5eoxg:1765797804011&udm=2&fbs=AIIjpHxU7SXXniUZfeShr2fp4giZ1Y6MJ25_tmWITc7uy4KIeuYzzFkfneXafNx6OMdA4MQRJc_t_TQjwHYrzlkIauOK_IaFSQcTHs2AgJbmYqOLNlPDT0Hy19TTgd1LyYk-nATqUlksEoQZVG09gZfle_U4HWWnSbP00Bg1jXXhxPXHO_ZklXeHNi63K93FV-i7HL9XSIXF&q=appointment+form&sa=X&ved=2ahUKEwi-vem2vb-RAxVtQ_EDHd_zPNAQtKgLegQIGBAB&biw=1243&bih=575&dpr=1.1#sv=CAMSVhoyKhBlLUtVQVJPV0x6UEJ0bmtNMg5LVUFST1dMelBCdG5rTToOQUtwOEZKNkM0dmdCeE0gBCocCgZtb3NhaWMSEGUtS1VBUk9XTHpQQnRua00YADABGAcguMDnlggwAkoKCAIQAhgBIAIoAQ
