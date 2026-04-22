@@ -40,6 +40,6 @@ Start development server
 npm run dev
 
 Purpose
-This project was developed as an academic and practical learning project to understand real world React application structure and hospital workflow management
+"Developed during a 3-month frontend internship at Shifa International Hospital, Islamabad (MIS Department), Nov 2025 – Jan 2026. Built to support hospital operations management.
 
 
